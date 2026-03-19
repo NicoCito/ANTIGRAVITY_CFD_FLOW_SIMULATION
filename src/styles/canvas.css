@@ -1,0 +1,96 @@
+/* === Canvas & Drop Zone === */
+#render-canvas {
+  cursor: crosshair;
+}
+
+#render-canvas.grabbing {
+  cursor: grabbing;
+}
+
+/* Drop overlay */
+#drop-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(13, 17, 23, 0.85);
+  backdrop-filter: blur(8px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+#drop-overlay.visible {
+  display: flex;
+}
+
+.drop-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-4);
+  padding: var(--sp-6);
+  border: 2px dashed var(--accent-blue);
+  border-radius: var(--radius-xl);
+  color: var(--accent-blue);
+  font-size: var(--fs-lg);
+  font-weight: 500;
+  animation: dropPulse 2s ease-in-out infinite;
+}
+
+.drop-icon {
+  font-size: 3rem;
+}
+
+@keyframes dropPulse {
+  0%, 100% { opacity: 0.7; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); }
+}
+
+/* Toast notifications */
+#toast-container {
+  position: fixed;
+  bottom: var(--sp-5);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column-reverse;
+  gap: var(--sp-2);
+  z-index: 10000;
+  pointer-events: none;
+}
+
+.toast {
+  padding: var(--sp-3) var(--sp-5);
+  border-radius: var(--radius-lg);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  font-family: var(--font-sans);
+  color: white;
+  backdrop-filter: blur(12px);
+  box-shadow: var(--shadow-lg);
+  animation: toastIn 300ms ease forwards;
+  white-space: nowrap;
+  pointer-events: auto;
+}
+
+.toast.info { background: rgba(88, 166, 255, 0.9); }
+.toast.success { background: rgba(63, 185, 80, 0.9); }
+.toast.warning { background: rgba(210, 153, 34, 0.9); }
+.toast.error { background: rgba(248, 81, 73, 0.9); }
+
+.toast.fade-out {
+  animation: toastOut 300ms ease forwards;
+}
+
+@keyframes toastIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes toastOut {
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(20px); }
+}
